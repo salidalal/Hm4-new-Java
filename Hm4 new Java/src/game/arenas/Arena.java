@@ -162,7 +162,6 @@ public abstract class Arena implements Observer {
 
 	
 	
-	public void show
 	
 	
 	

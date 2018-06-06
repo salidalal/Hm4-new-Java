@@ -2,6 +2,7 @@ package game.racers;
 import java.util.Hashtable;
 import java.util.Observable;
 
+import State.State;
 import game.arenas.Arena;
 import game.racers.state.RacerState;
 import utilities.EnumContainer;
@@ -10,7 +11,7 @@ import utilities.Fate;
 import utilities.Mishap;
 import utilities.Point;
 
-public abstract class Racer extends Observable implements Runnable,IRacer {
+public abstract class Racer extends Observable implements IRacer ,Runnable{
 	protected static int lastSerialNumber = 1;
 
 	public static int getLastSerialNumber() {
@@ -29,8 +30,9 @@ public abstract class Racer extends Observable implements Runnable,IRacer {
 	//private EnumContainer.Color color; // (RED,GREEN,BLUE,BLACK,YELLOW)
 	private Mishap mishap;
 	private double arenaFriction;
-	private RacerState state;
+	//private RacerState state;
 	private Arena arena;
+	private State state;
 
 	/**
 	 * @param name
@@ -53,11 +55,7 @@ public abstract class Racer extends Observable implements Runnable,IRacer {
 	public abstract String className();
 
 	
-	public void addAttribute(String str,Object obj) {		
-		//TODO: add in wheeled racers
-		atters.put(str, obj);
-	}
-	
+
 	
 	
 	
@@ -148,11 +146,9 @@ public abstract class Racer extends Observable implements Runnable,IRacer {
 		this.setFinish(new Point(finish));
 		this.setArenaFriction(friction);
 	}
-	@Override
-	public void introduce() {
-		// Prints a line, obtained from describeRacer(), with its type
-		System.out.println("[" + this.className() + "] " + this.describeRacer());
-	}
+	
+
+	
 
 	private boolean isDisabled() {
 		if (this.mishap != null) {
@@ -270,10 +266,29 @@ public abstract class Racer extends Observable implements Runnable,IRacer {
 	
 	
 	
-	public void setState(RacerState state) {
-		this.state=state;
-		state.notifyArena();
+	public void setState(State state) {
+		this.state = state;
+		arena.update(this, null);
+	}
+	public State getState() {
+		return state;
 	}
 	
-	public
+	public void addAttribute(String str,Object obj) {		
+		//TODO: add in wheeled racers
+		atters.put(str, obj);
+	}
+	@Override
+	public void introduce() {
+		// Prints a line, obtained from describeRacer(), with its type
+		System.out.println("[" + this.className() + "] " + this.describeRacer());
+	}
+	
+	public Racer makeCopy() {
+		Racer racer;
+		return racer;
+	}
+
+
+
 }

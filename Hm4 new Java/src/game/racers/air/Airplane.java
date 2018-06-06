@@ -43,11 +43,5 @@ public class Airplane extends Racer implements IAerialRacer {
 		this.wheeled = wheeled;
 	}
 
-	@Override
-	public IRacer makeCopy() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 }

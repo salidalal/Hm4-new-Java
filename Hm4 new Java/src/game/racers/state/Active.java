@@ -1,16 +1,18 @@
 package game.racers.state;
 
+import State.State;
 import game.racers.Racer;
 
-public class Active implements RacerState {
+public class Active implements State {
 	
 	public Active() {
+		
 	}
-
+	
+	
 	@Override
-	public void notifyArena(Racer racer) {
-		racer.setState(this);
-
+	public void setState(Racer racer) {
+		racer.setState(this);		
 	}
-
+	
 }
